@@ -22,6 +22,15 @@ create table users_roles
     primary key (user_id, role_id)
 );
 
+--create table cart
+--(
+--    id              bigserial primary key,
+--    quantity        int,
+--    item_price      int,
+--    total_price     int,
+--    product_id      bigint not null references products (id)
+--);
+
 insert into roles (name)
 values ('ROLE_USER'),
        ('ROLE_ADMIN');

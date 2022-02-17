@@ -49,13 +49,26 @@
         <tbody>
         <tr ng-repeat="item in cart.items">
             <td>{{item.productTitle}}</td>
-            <td>{{item.quantity}}</td>
-            <td>{{item.pricePerProduct + ' x ' + item.quantity + ' = ' + item.price}}</td>
+            <td>
+                <button type="button" class="btn btn-danger" ng-click="subtractToCart(item.productId)">-</button>
+                {{item.quantity}}
+                <button type="button" class="btn btn-success" ng-click="addToCart(item.productId)">+</button>
+            </td>
+            <td>
+                {{item.pricePerProduct + ' x ' + item.quantity + ' = ' + item.price}}
+                <button type="button" class="btn btn-dark" ng-click="deleteProductToCart(item.productId)">Удалить позицию</button>
+            </td>
         </tr>
         <tr>
             <td>Итого</td>
             <td></td>
             <td>{{cart.totalPrice}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Очистить корзину</td>
+            <td> <button type="button" class="btn secondary"
+                         ng-click="clearCart()">Сделать это!</button></td>
         </tr>
         </tbody>
     </table>

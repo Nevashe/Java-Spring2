@@ -27,4 +27,18 @@ public class CartService {
         Product product = productService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Не удается добавить продукт с id: " + productId + " в корзину. Продукт не найден"));
         tempCart.add(product);
     }
+
+    public void subtract(Long productId) {
+        Product product = productService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Не удается уменьшить количество продукта с id: " + productId + " в корзине. Продукт не найден"));
+        tempCart.subtract(product);
+    }
+
+    public void deleteProduct(Long productId) {
+        Product product = productService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Не удается удалить продукт с id: " + productId + " из корзины. Продукт не найден"));
+        tempCart.delete(product.getId());
+    }
+
+    public void clearCart() {
+        tempCart = new Cart();
+    }
 }

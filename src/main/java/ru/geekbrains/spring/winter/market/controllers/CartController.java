@@ -19,6 +19,21 @@ public class CartController {
         cartService.add(id);
     }
 
+    @GetMapping("/subtract/{id}")
+    public void subtractToCart(@PathVariable Long id) {
+        cartService.subtract(id);
+    }
+
+    @GetMapping("/delete/{id}")
+    public void deleteProductToCart(@PathVariable Long id) {
+        cartService.deleteProduct(id);
+    }
+
+    @GetMapping("/clear")
+    public void clearCart() {
+        cartService.clearCart();
+    }
+
     @GetMapping
     public Cart getCurrentCart() {
         return cartService.getCurrentCart();

@@ -1,11 +1,12 @@
 package ru.geekbrains.spring.winter.market.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.spring.winter.market.entities.Product;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import ru.geekbrains.spring.winter.market.dtos.Cart;
 import ru.geekbrains.spring.winter.market.services.CartService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/cart")
@@ -13,18 +14,13 @@ import java.util.List;
 public class CartController {
     private final CartService cartService;
 
+    @GetMapping("/add/{id}")
+    public void addToCart(@PathVariable Long id) {
+        cartService.add(id);
+    }
+
     @GetMapping
-    public List<Product> findAllProducts() {
-        return cartService.getCart();
-    }
-
-    @GetMapping("/{id}")
-    public void addProductById(@PathVariable Long id) {
-        cartService.addProductInCart(id);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteProductById(@PathVariable Long id) {
-        cartService.removeProductInCart(id);
+    public Cart getCurrentCart() {
+        return cartService.getCurrentCart();
     }
 }

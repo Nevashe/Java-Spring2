@@ -1,4 +1,12 @@
-create table products (id bigserial primary key, title varchar(255), price int);
+create table products
+(
+    id bigserial    primary key,
+    title           varchar(255),
+    price           int,
+    created_at      timestamp default current_timestamp,
+    updated_at      timestamp default current_timestamp
+);
+
 insert into products (title, price) values
 ('Milk', 80), ('Bread', 25), ('Cheese', 300);
 
@@ -21,15 +29,6 @@ create table users_roles
     role_id    bigint not null references roles (id),
     primary key (user_id, role_id)
 );
-
---create table cart
---(
---    id              bigserial primary key,
---    quantity        int,
---    item_price      int,
---    total_price     int,
---    product_id      bigint not null references products (id)
---);
 
 insert into roles (name)
 values ('ROLE_USER'),

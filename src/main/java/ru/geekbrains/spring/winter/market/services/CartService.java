@@ -2,9 +2,9 @@ package ru.geekbrains.spring.winter.market.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.spring.winter.market.dtos.Cart;
 import ru.geekbrains.spring.winter.market.entities.Product;
 import ru.geekbrains.spring.winter.market.exceptions.ResourceNotFoundException;
+import ru.geekbrains.spring.winter.market.model.Cart;
 
 import javax.annotation.PostConstruct;
 
@@ -28,17 +28,11 @@ public class CartService {
         tempCart.add(product);
     }
 
-    public void subtract(Long productId) {
-        Product product = productService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Не удается уменьшить количество продукта с id: " + productId + " в корзине. Продукт не найден"));
-        tempCart.subtract(product);
+    public void remove(Long productId) {
+        tempCart.remove(productId);
     }
 
-    public void deleteProduct(Long productId) {
-        Product product = productService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Не удается удалить продукт с id: " + productId + " из корзины. Продукт не найден"));
-        tempCart.delete(product.getId());
-    }
-
-    public void clearCart() {
-        tempCart = new Cart();
+    public void clear() {
+        tempCart.clear();
     }
 }

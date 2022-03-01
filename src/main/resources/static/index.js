@@ -88,7 +88,19 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
             $scope.cart = response.data;
         });
     }
+    $scope.createOrder = function () {
+        $http.post('http://localhost:8189/winter/api/v1/orders', $scope.user).then(function ($http) {
+            $scope.clearCart();
+            $scope.loadOrders();
+        });
+    }
+     $scope.loadOrders = function () {
+            $http.get('http://localhost:8189/winter/api/v1/orders').then(function (response) {
+                $scope.ordersList = response.data;
+            });
+     }
 
     $scope.loadProducts();
     $scope.loadCart();
+    $scope.loadOrders();
 });

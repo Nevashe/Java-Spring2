@@ -60,8 +60,9 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
     }
 
     $scope.createOrder = function () {
-        $http.post('http://localhost:8189/winter/api/v1/orders').then(function (response) {
-            alert('Заказ оформлен');
+        $http.post('http://localhost:8189/winter/api/v1/orders', $scope.user).then(function () {
+            $scope.loadOrders();
+            $scope.loadCart();
         });
     }
 
@@ -72,19 +73,19 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
     }
 
     $scope.removeFromCart = function (productId) {
-        $http.get('http://localhost:8190/winter-carts/api/v1/cart/remove/' + productId).then(function (response) {
+        $http.get('http://localhost:8190/winter-carts/api/v1/cart/remove/' + productId).then(function () {
             $scope.loadCart();
         });
     }
 
     $scope.clearCart = function () {
-        $http.get('http://localhost:8190/winter-carts/api/v1/cart/clear').then(function (response) {
+        $http.get('http://localhost:8190/winter-carts/api/v1/cart/clear').then(function () {
             $scope.loadCart();
         });
     }
 
     $scope.addToCart = function (productId) {
-        $http.get('http://localhost:8190/winter-carts/api/v1/cart/add/' + productId).then(function (response) {
+        $http.get('http://localhost:8190/winter-carts/api/v1/cart/add/' + productId).then(function () {
             $scope.loadCart();
         });
     }
@@ -95,6 +96,12 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
         });
     }
 
+     $scope.loadOrders = function () {
+            $http.get('http://localhost:8189/winter/api/v1/orders').then(function (response) {
+                $scope.ordersList = response.data;
+            });
+     }
     $scope.loadProducts();
     $scope.loadCart();
+    $scope.loadOrders();
 });

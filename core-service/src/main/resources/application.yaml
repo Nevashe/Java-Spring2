@@ -1,4 +1,5 @@
 server:
+  url: 'http://localhost:'
   port: 8189
   servlet:
     context-path: /winter
@@ -21,3 +22,5 @@ spring:
 jwt:
   secret: F65hgG#*FGF3r45&^SFertD345Sert%FDF#G345j234fguygwe54f87t*Tgf
   lifetime: 36000000
+
+portCart : 8190

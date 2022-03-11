@@ -1,11 +1,14 @@
 package ru.geekbrains.winter.market.api;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class CartItemDto {
     private Long productId;
     private String productTitle;
     private int quantity;
-    private int pricePerProduct;
-    private int price;
+    private BigDecimal pricePerProduct;
+    private BigDecimal price;
 
     public Long getProductId() {
         return productId;
@@ -31,19 +34,19 @@ public class CartItemDto {
         this.quantity = quantity;
     }
 
-    public int getPricePerProduct() {
-        return pricePerProduct;
+    public BigDecimal getPricePerProduct() {
+        return pricePerProduct.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public void setPricePerProduct(int pricePerProduct) {
-        this.pricePerProduct = pricePerProduct;
+    public void setPricePerProduct(BigDecimal pricePerProduct) {
+        this.pricePerProduct = pricePerProduct.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public int getPrice() {
-        return price;
+    public BigDecimal getPrice() {
+        return price.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setPrice(BigDecimal price) {
+        this.price = price.setScale(2, RoundingMode.HALF_UP);
     }
 }

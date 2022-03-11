@@ -90,6 +90,13 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
         });
     }
 
+    $scope.filters = function () {
+        $http.post('http://localhost:5555/core/api/v1/products/filters', $scope.filter).then(function (response) {
+        $scope.productsList = response.data;
+    });
+    $scope.loadProducts();
+    };
+
     $scope.loadProducts();
     $scope.loadCart();
 });

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.winter.market.api.ProductDto;
 import ru.geekbrains.winter.market.api.ResourceNotFoundException;
 import ru.geekbrains.winter.market.core.converters.ProductConverter;
+import ru.geekbrains.winter.market.core.entities.Filters;
 import ru.geekbrains.winter.market.core.entities.Product;
 import ru.geekbrains.winter.market.core.services.ProductService;
 
@@ -38,5 +39,11 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public void deleteProductById(@PathVariable Long id) {
         productService.deleteById(id);
+    }
+
+    @PostMapping("/filters")
+    public List<ProductDto> getProductByFilters(@RequestBody Filters filters) {
+        return productService.getProductsWithPagingAndFiltering(filters).stream()
+                .map(productConverter::entityToDto).collect(Collectors.toList());
     }
 }

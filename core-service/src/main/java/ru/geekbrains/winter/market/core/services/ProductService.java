@@ -25,10 +25,6 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
-    public Optional<Product> findByTitle(String title) {
-        return productRepository.findByTitle(title);
-    }
-
     public void deleteById(Long id) {
         productRepository.deleteById(id);
     }

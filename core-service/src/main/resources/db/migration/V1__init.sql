@@ -18,7 +18,12 @@ create table products
 );
 
 insert into products (title, price, category_id) values
-('Milk', 80.50, 1), ('Bread', 25.50, 1), ('Cheese', 300.80, 1);
+('Milk', 80.50, 1),
+('Bread', 25.50, 1),
+('Butter', 200.10, 1),
+('Fish', 500.90, 1),
+('Juice', 100.00, 1),
+('Cheese', 300.80, 1);
 
 create table orders
 (

@@ -3,19 +3,17 @@ package ru.geekbrains.winter.market.carts.model;
 import lombok.Data;
 import ru.geekbrains.winter.market.api.ProductDto;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Data
 public class Cart {
     private List<CartItem> items;
-    private BigDecimal totalPrice;
+    private int totalPrice;
 
     public Cart() {
         this.items = new ArrayList<>();
-        this.totalPrice = BigDecimal.ZERO;
     }
 
     public List<CartItem> getItems() {
@@ -42,24 +40,13 @@ public class Cart {
 
     public void clear() {
         items.clear();
-        setTotalPrice(BigDecimal.valueOf(0));
+        totalPrice = 0;
     }
 
     private void recalculate() {
+        totalPrice = 0;
         for (CartItem item : items) {
-            totalPrice = totalPrice.add(item.getPrice()).setScale(2, RoundingMode.HALF_UP);
+            totalPrice += item.getPrice();
         }
-    }
-
-    public void setItems(List<CartItem> items) {
-        this.items = items;
-    }
-
-    public BigDecimal getTotalPrice() {
-        return totalPrice.setScale(2, RoundingMode.HALF_UP);
-    }
-
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice.setScale(2, RoundingMode.HALF_UP);
     }
 }

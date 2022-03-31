@@ -1,6 +1,7 @@
 package ru.geekbrains.winter.market.core.services;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.winter.market.api.CartDto;
@@ -11,7 +12,7 @@ import ru.geekbrains.winter.market.core.repositories.OrderRepository;
 
 import java.util.stream.Collectors;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class OrderService {
     private final ProductService productService;
@@ -19,8 +20,8 @@ public class OrderService {
     private final CartServiceIntegration cartServiceIntegration;
 
     @Transactional
-    public void createOrder(String username) {
-        CartDto cartDto = cartServiceIntegration.getCurrentCart(username);
+    public Order createOrder(String username) {
+        CartDto cartDto = cartServiceIntegration.getCurrentCart();
         Order order = new Order();
         order.setUsername(username);
         order.setTotalPrice(cartDto.getTotalPrice());
@@ -34,6 +35,7 @@ public class OrderService {
                 )
         ).collect(Collectors.toList()));
         orderRepository.save(order);
-        cartServiceIntegration.clear(username);
+        cartServiceIntegration.clear();
+        return order;
     }
 }

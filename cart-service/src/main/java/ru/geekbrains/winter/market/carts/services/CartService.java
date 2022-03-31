@@ -8,50 +8,32 @@ import ru.geekbrains.winter.market.carts.integrations.ProductServiceIntegration;
 import ru.geekbrains.winter.market.carts.model.Cart;
 
 import javax.annotation.PostConstruct;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class CartService {
     private final ProductServiceIntegration productServiceIntegration;
-    private Map<String,Cart> mapTempCart;
+    private Cart tempCart;
 
     @PostConstruct
     public void init() {
-        mapTempCart = new HashMap<>();
-        mapTempCart.put("", new Cart());
+        tempCart = new Cart();
     }
 
-    public Cart getCurrentCart(String username) {
-        checkCart(username);
-        return mapTempCart.get(username);
+    public Cart getCurrentCart() {
+        return tempCart;
     }
 
-    public void add(Long productId, String username) {
+    public void add(Long productId) {
         ProductDto product = productServiceIntegration.getProductById(productId);
-        Cart c = mapTempCart.get(username);
-        c.add(product);
-        mapTempCart.replace(username, c);
+        tempCart.add(product);
     }
 
-    public void remove(Long productId, String username) {
-        Cart c = mapTempCart.get(username);
-        c.remove(productId);
-        mapTempCart.replace(username, c);
+    public void remove(Long productId) {
+        tempCart.remove(productId);
     }
 
-    public void clear(String username) {
-        Cart c = mapTempCart.get(username);
-        c.clear();
-        mapTempCart.replace(username, c);
+    public void clear() {
+        tempCart.clear();
     }
-
-    public void checkCart(String username){
-        if(!mapTempCart.containsKey(username)){
-            mapTempCart.put(username, new Cart());
-        }
-    }
-
-
 }

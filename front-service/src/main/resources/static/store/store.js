@@ -1,16 +1,10 @@
 angular.module('market').controller('storeController', function ($scope, $http, $location, $localStorage) {
     const contextPath = 'http://localhost:5555/core/';
     const cartContextPath = 'http://localhost:5555/cart/';
-    curr_page = 1;
 
-    $scope.loadProducts = function (page) {
-        $http.get(contextPath + 'api/v1/products?p=' + page).then(function (response) {
-            $scope.productsList = response.data.content
-                var range = [];
-                for(var i=1;i<response.data.totalPages+1;i++) {
-                     range.push(i);
-                    }
-            $scope.pages = range;
+    $scope.loadProducts = function () {
+        $http.get(contextPath + 'api/v1/products').then(function (response) {
+            $scope.productsList = response.data;
         });
     }
 
@@ -26,17 +20,5 @@ angular.module('market').controller('storeController', function ($scope, $http, 
         });
     }
 
-    $scope.addPage = function(){
-        if (curr_page < $scope.pages.length){
-            curr_page++;
-            $scope.loadProducts(curr_page);
-        }
-    };
-    $scope.removePage = function(){
-        if (curr_page > $scope.pages[0]){
-            curr_page--;
-            $scope.loadProducts(curr_page);
-        }
-    };
-    $scope.loadProducts(curr_page);
+    $scope.loadProducts();
 });

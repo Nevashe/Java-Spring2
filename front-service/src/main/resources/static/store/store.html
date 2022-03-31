@@ -21,4 +21,24 @@
         </tr>
         </tbody>
     </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" ng-click="removePage()" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <div ng-repeat="p in pages" >
+                <li  class="page-item">
+                    <a class="page-link" ng-click="loadProducts(p)">{{p}}</a>
+                </li>
+            </div>
+
+            <li class="page-item">
+                <a class="page-link" ng-click="addPage()" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>

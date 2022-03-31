@@ -15,6 +15,7 @@ public class Cart {
 
     public Cart() {
         this.items = new ArrayList<>();
+        this.totalPrice = BigDecimal.ZERO;
     }
 
     public List<CartItem> getItems() {
@@ -45,9 +46,8 @@ public class Cart {
     }
 
     private void recalculate() {
-        totalPrice = BigDecimal.valueOf(0);
         for (CartItem item : items) {
-            totalPrice.add(item.getPrice()).setScale(2, RoundingMode.HALF_UP);
+            totalPrice = totalPrice.add(item.getPrice()).setScale(2, RoundingMode.HALF_UP);
         }
     }
 

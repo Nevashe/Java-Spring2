@@ -5,7 +5,7 @@ import ru.geekbrains.winter.market.api.ProductDto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 @Data
@@ -38,6 +38,23 @@ public class Cart {
     public void clear() {
         items.clear();
         totalPrice = BigDecimal.ZERO;
+    }
+
+    public void merge(Cart tempCart) {
+            for(CartItem tempItem: tempCart.getItems()){
+                boolean tmp = true; // без флага не придумал как
+                for(CartItem item: items){
+                    if (tempItem.getProductId().equals(item.getProductId())) {
+                        item.changeQuantity(tempItem.getQuantity());
+                        tmp = false;
+                        break;
+                    }
+                }
+            if (tmp) {
+               items.add(tempItem);
+            }
+        }
+        recalculate();
     }
 
     private void recalculate() {

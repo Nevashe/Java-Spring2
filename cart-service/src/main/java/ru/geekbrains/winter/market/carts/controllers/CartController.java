@@ -48,6 +48,7 @@ public class CartController {
 
     private String getCartUuid(String username, String uuid) {
         if (username != null) {
+            cartService.merger(username, uuid);
             return username;
         }
         return uuid;

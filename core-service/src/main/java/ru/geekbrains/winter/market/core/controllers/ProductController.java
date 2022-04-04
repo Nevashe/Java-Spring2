@@ -10,6 +10,9 @@ import ru.geekbrains.winter.market.core.converters.ProductConverter;
 import ru.geekbrains.winter.market.core.entities.Product;
 import ru.geekbrains.winter.market.core.services.ProductService;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
@@ -29,7 +32,6 @@ public class ProductController {
         }
         Specification<Product> spec = productService.createSpecByFilters(minPrice, maxPrice, title);
         return productService.findAll(spec, page - 1).map(productConverter::entityToDto);
-
     }
 
     @GetMapping("/{id}")

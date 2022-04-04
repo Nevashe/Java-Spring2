@@ -1,7 +1,6 @@
 package ru.geekbrains.winter.market.api;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,10 +18,10 @@ public class CartDto {
     }
 
     public BigDecimal getTotalPrice() {
-        return totalPrice.setScale(2, RoundingMode.HALF_UP);
+        return totalPrice;
     }
 
     public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice.setScale(2, RoundingMode.HALF_UP);
+        this.totalPrice = totalPrice;
     }
 }

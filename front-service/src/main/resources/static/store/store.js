@@ -21,10 +21,10 @@ angular.module('market').controller('storeController', function ($scope, $http, 
     }
 
     $scope.addToCart = function (productId) {
-        $http.get(cartContextPath + 'api/v1/cart/add/' + productId).then(function (response) {
-            $scope.loadCart();
+        $http.get(cartContextPath + 'api/v1/cart/' + $localStorage.winterMarketGuestCartId + '/add/' + productId).then(function (response) {
         });
     }
+
 
     $scope.addPage = function(){
         if (curr_page < $scope.pages.length){

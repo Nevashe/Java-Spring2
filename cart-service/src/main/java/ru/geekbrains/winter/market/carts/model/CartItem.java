@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 @Data
 @AllArgsConstructor
@@ -19,23 +18,6 @@ public class CartItem {
 
     public void changeQuantity(int delta) {
         quantity += delta;
-        price = pricePerProduct.multiply(BigDecimal.valueOf(quantity))
-                .setScale(2, RoundingMode.HALF_UP);
-    }
-
-    public BigDecimal getPricePerProduct() {
-        return pricePerProduct.setScale(2, RoundingMode.HALF_UP);
-    }
-
-    public void setPricePerProduct(BigDecimal pricePerProduct) {
-        this.pricePerProduct = pricePerProduct.setScale(2, RoundingMode.HALF_UP);
-    }
-
-    public BigDecimal getPrice() {
-        return price.setScale(2, RoundingMode.HALF_UP);
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price.setScale(2, RoundingMode.HALF_UP);
+        price = pricePerProduct.multiply(BigDecimal.valueOf(quantity));
     }
 }

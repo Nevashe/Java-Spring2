@@ -1,7 +1,6 @@
 package ru.geekbrains.winter.market.api;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class ProductDto {
     private Long id;
@@ -26,11 +25,11 @@ public class ProductDto {
     }
 
     public BigDecimal getPrice() {
-        return price.setScale(2, RoundingMode.HALF_UP);
+        return price;
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = price.setScale(2, RoundingMode.HALF_UP);
+        this.price = price;
     }
 
     public String getCategoryTitle() {

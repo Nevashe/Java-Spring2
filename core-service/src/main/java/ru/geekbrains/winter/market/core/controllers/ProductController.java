@@ -91,8 +91,17 @@ public class ProductController {
         return productConverter.entityToDto(p);
     }
 
+    @Operation(
+            summary = "Запрос на удаление продукта по id",
+            responses = {
+                    @ApiResponse(
+                            description = "Успешный ответ", responseCode = "200",
+                            content = @Content(schema = @Schema())
+                    )
+            }
+    )
     @DeleteMapping("/{id}")
-    public void deleteProductById(@PathVariable Long id) {
+    public void deleteProductById(@PathVariable @Parameter(description = "Идентификатор продукта", required = true) Long id) {
         productService.deleteById(id);
     }
 }

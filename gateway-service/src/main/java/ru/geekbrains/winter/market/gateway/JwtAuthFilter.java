@@ -28,6 +28,10 @@ public class JwtAuthFilter extends AbstractGatewayFilterFactory<JwtAuthFilter.Co
                 return this.onError(exchange, "Invalid header username", HttpStatus.BAD_REQUEST);
             }
 
+            if (request.getHeaders().containsKey("roles")) {
+                return this.onError(exchange, "Invalid header roles", HttpStatus.BAD_REQUEST);
+            }
+
             if (!isAuthMissing(request)) {
                 final String token = getAuthHeader(request);
                 if (jwtUtil.isInvalid(token)) {
@@ -66,7 +70,12 @@ public class JwtAuthFilter extends AbstractGatewayFilterFactory<JwtAuthFilter.Co
         Claims claims = jwtUtil.getAllClaimsFromToken(token);
         exchange.getRequest().mutate()
                 .header("username", claims.getSubject())
-//                .header("role", String.valueOf(claims.get("role")))
+                // Сразу разбиваю на массив ролей. для удобства остальным, где лучше указать что это будет массив?
+                .header("roles", String.valueOf(claims.get("roles"))
+                                                    .replaceAll(" ", "")
+                                                    .replaceAll("\\[", "")
+                                                    .replaceAll("]", "")
+                                                    .split(","))
                 .build();
     }
 }

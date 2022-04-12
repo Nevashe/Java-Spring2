@@ -92,4 +92,9 @@ angular.module('market').controller('indexController', function ($rootScope, $sc
             return false;
         }
     };
+    $scope.yourAdmin = function () {
+       $http.get('http://localhost:5555/core/api/v1/admin').then(function (response) {
+                alert(response.data.value);
+            });
+       };
 });

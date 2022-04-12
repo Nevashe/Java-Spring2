@@ -28,8 +28,12 @@ public class CartService {
     }
 
     public void add(String uuid, Long productId) {
-        ProductDto product = productServiceIntegration.getProductById(productId);
-        execute(uuid, cart -> cart.add(product));
+        execute(uuid, cart -> {
+            if(!cart.add(productId)){
+                ProductDto product = productServiceIntegration.getProductById(productId);
+                cart.addNewProduct(product);
+            }
+        });
     }
 
     public void remove(String uuid, Long productId) {

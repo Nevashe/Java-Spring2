@@ -11,7 +11,6 @@
         <module>front-service</module>
         <module>gateway-service</module>
         <module>auth-service</module>
-		<module>rabbitmq-console</module>
     </modules>
 
 	<groupId>ru.geekbrains.spring</groupId>

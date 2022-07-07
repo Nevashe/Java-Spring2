@@ -70,7 +70,6 @@ public class JwtAuthFilter extends AbstractGatewayFilterFactory<JwtAuthFilter.Co
         Claims claims = jwtUtil.getAllClaimsFromToken(token);
         exchange.getRequest().mutate()
                 .header("username", claims.getSubject())
-                // Сразу разбиваю на массив ролей. для удобства остальным, где лучше указать что это будет массив?
                 .header("roles", String.valueOf(claims.get("roles"))
                                                     .replaceAll(" ", "")
                                                     .replaceAll("\\[", "")

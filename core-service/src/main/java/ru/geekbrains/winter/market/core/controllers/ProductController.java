@@ -54,6 +54,7 @@ public class ProductController {
         out.setItems(jpaPage.getContent());
         out.setTotalPages(jpaPage.getTotalPages());
         return out;
+
     }
 
     @Operation(

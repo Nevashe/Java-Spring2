@@ -39,7 +39,6 @@ public class OrderService {
         cartServiceIntegration.clear(username);
         return order;
     }
-
     public List<Order> findByUsername(String username) {
         return orderRepository.findByUsername(username);
     }

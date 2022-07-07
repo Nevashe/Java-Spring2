@@ -16,7 +16,6 @@ public class AdminController {
 
     @GetMapping
     public ResponseEntity adminPanel(@RequestHeader String[] roles) {
-        //Наверно есть смысл enum сделать под роли, или можно как-то иначе?
         String roleAdmin = "ROLE_ADMIN";
         for (String role : roles){
             if (role.equals(roleAdmin)){
